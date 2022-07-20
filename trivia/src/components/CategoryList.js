@@ -1,22 +1,40 @@
 import React from 'react'
-// import {useState} from 'react'
+import { useState } from 'react'
+import Questions from './Questions'
+// import Categories from './Catergories'
 
 function CategoryList({ categories }) {
-    // const [data, setData] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState(null)
+    const [categoryURL, setCategoryURL] = useState()
     const afterClick = () => {
-        console.log("ok")
+        console.log('selected')
+    }
+    const handleSelectedCategory = (selected) => {
+        console.log(`selected category: ${selected.name}, id: ${selected.id}`)
+        setSelectedCategory(selected)
+        makeURL(selected)
+    }
+    const makeURL = (selectedCategory) => {
+        setCategoryURL(`https://opentdb.com/api.php?amount=10&category=${selectedCategory.id}&type=multiple`)
     }
 
     return (
         <div>
-            <h1>Category List</h1>
-            {categories.map((category) =>
-                <div>
-                    <button onClick={afterClick}>{category.name}</button>
-                </div>
+            {selectedCategory ? (
+                <h1>{selectedCategory.name}</h1>
+            ) : (
+                <h1>Catergory List</h1>
             )}
-
-        </div>
+            {selectedCategory ? (
+                <Questions categoryURL={categoryURL} />
+            ) : (
+                categories.map((category) =>
+                    <div>
+                        <button onClick={() => handleSelectedCategory(category)}>{category.name}</button>
+                    </div>
+                )
+            )}
+        </div >
     )
 }
 
