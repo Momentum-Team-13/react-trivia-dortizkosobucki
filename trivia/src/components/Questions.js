@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 function Questions({ categoryURL }) {
-    const [question, setQuestion] = useState([])
+
+    const [triviaQuestions, setTriviaQuestions] = useState([])
+
     function decodeHtml(html) {
         let txt = document.createElement("textarea");
         txt.innerHTML = html;
@@ -12,12 +14,12 @@ function Questions({ categoryURL }) {
         console.log(`url: ${categoryURL}`)
         axios
             .get(categoryURL)
-            .then((res) => setQuestion(res.data.results))
+            .then((res) => { setTriviaQuestions(res.data.results) })
     }, [categoryURL])
     return (
         <div>
             <h1>Question 1</h1>
-            <p>{decodeHtml(question)}</p>
+            <p>{decodeHtml(triviaQuestions[0].question)}</p>
         </div>
     )
 }
