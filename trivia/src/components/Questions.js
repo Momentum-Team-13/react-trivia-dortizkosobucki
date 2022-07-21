@@ -18,10 +18,11 @@ function Questions({ categoryURL }) {
     }, [categoryURL])
     return (
         <div>
-            <h1>Question 1</h1>
-            <p>{decodeHtml(triviaQuestions[0].question)}</p>
+            <h1>Questions</h1>
+            {triviaQuestions.length > 0 &&
+                <p>{decodeHtml(triviaQuestions[0].question)}</p>}
         </div>
-    )
+    );
 }
 
 export default Questions
