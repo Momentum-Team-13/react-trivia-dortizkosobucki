@@ -1,4 +1,20 @@
-.App {
+body {
+  display: flex;
+  flex: row auto;
+}
+
+button {
+  margin: 10px;
+  padding: 10px;
+}
+
+.categoryButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +51,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
