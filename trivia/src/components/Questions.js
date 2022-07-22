@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import CategoryList from './CategoryList'
+import endGame from './Endgame'
 
 function Questions(categoryURL) {
     const { categoryID } = categoryURL
@@ -8,6 +8,7 @@ function Questions(categoryURL) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [count, setCount] = useState(0)
     const [messageAnswer, setMessageAnswer] = useState(null)
+
     //decode and make html readable for questions 
     function decodeHtml(html) {
         let txt = document.createElement("textarea");
@@ -62,53 +63,32 @@ function Questions(categoryURL) {
     //return for Questions function
     return (
         <>
-            <div className='questions-list'>
-                {triviaQuestions.length > 0 &&
-                    <>
-                        <h1>Question {currentQuestionIndex + 1}:<br />
-                            {decodeHtml(triviaQuestions[currentQuestionIndex].question)}</h1>
-                        <ul>
-                            {getAnswerList().map(
-                                (answer, index) => <li key={index}>
-                                    <button className='answerButtons' onClick={() => { handleUserAnswer(answer) }}>{decodeHtml(answer)}</button>
-                                </li>
-                            )}
-                        </ul>
-                        <br />
-                        <button>You have {count} right answers.</button>
-                    </>
-                }
-            </div>
+            {currentQuestionIndex < 10 ? (
+                <div className='questions-list'>
+                    {triviaQuestions.length > 0 &&
+                        <>
+                            <h1>Question {currentQuestionIndex + 1}:<br />
+                                {decodeHtml(triviaQuestions[currentQuestionIndex].question)}</h1>
+                            <ul>
+                                {getAnswerList().map(
+                                    (answer, index) => <li key={index}>
+                                        <button className='answerButtons' onClick={() => { handleUserAnswer(answer) }}>{decodeHtml(answer)}</button>
+                                    </li>
+                                )}
+                            </ul>
+                            <br />
+
+                            <button>You have {count} right answers.</button>
+
+                        </>
+                    }
+                </div>
+            ) : (
+                console.log("hello in there")
+                // <endGame categoryID={categoryID} count={count} />
+            )}
         </>
     );
 }
-
-
-// second edit 
-//<>
-//     {triviaQuestions ?
-//         <div className="questions">
-//             {triviaQuestions.map((question) =>
-//                 <div className="single-question">
-//                     <li key={question.question}> {decodeHtml(question.question)}
-//                         <ul><input type="radio" value={decodeHtml(question.correct_answer)} name="answer" />{decodeHtml(question.correct_answer)}</ul>
-//                         <div>
-//                             {question.incorrect_answers.map((answer) => (
-//                                 <ul><input type="radio" value={decodeHtml(answer.incorrect_answers)} name="answer" />{decodeHtml(answer)}</ul>
-//                             ))}
-//                         </div>
-//                     </li>
-//                 </div>)}
-//         </div> : ("")}
-// </>
-
-//first edit 
-// <div>
-//     <h1>Questions</h1>
-//     {triviaQuestions.length > 0 &&
-//         <p>{decodeHtml(triviaQuestions[0].question)}</p>}
-// </div >
-//     );
-// }
 
 export default Questions
