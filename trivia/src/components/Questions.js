@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import CategoryList from './CategoryList'
 
-function Questions({ categoryURL }) {
+function Questions(categoryURL) {
+    const { categoryID } = categoryURL
     const [triviaQuestions, setTriviaQuestions] = useState([])
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [count, setCount] = useState(0)
     const [messageAnswer, setMessageAnswer] = useState(null)
-
     //decode and make html readable for questions 
     function decodeHtml(html) {
         let txt = document.createElement("textarea");
@@ -26,17 +27,18 @@ function Questions({ categoryURL }) {
 
     //call information 
     useEffect(() => {
-        console.log(`url: ${categoryURL}`)
         axios
-            .get(categoryURL)
+            .get(`https://opentdb.com/api.php?amount=10&category=${categoryID}&type=multiple`)
             .then((res) => { setTriviaQuestions(res.data.results) })
-    }, [categoryURL])
+    }, [categoryID])
 
     //organize answer list instead of map 
     function getAnswerList() {
+        console.log(`categoryID ${categoryID}`)
+        console.log(`current index ${currentQuestionIndex}`)
+        console.log(`trivia questions ${triviaQuestions}`)
         let incorrectAnswers = triviaQuestions[currentQuestionIndex].incorrect_answers
         let correctAnswers = triviaQuestions[currentQuestionIndex].correct_answer
-        console.log(triviaQuestions)
         let combinedAnswers = [...incorrectAnswers, correctAnswers]
         let shuffledArr = getShuffledArr(combinedAnswers)
         return shuffledArr
@@ -45,13 +47,13 @@ function Questions({ categoryURL }) {
     // user input answer
     function handleUserAnswer(answer) {
         let correctAnswers = triviaQuestions[currentQuestionIndex].correct_answer
-        if (answer === triviaQuestions[currentQuestionIndex].correctAnswers) {
+        if (answer === triviaQuestions[currentQuestionIndex].correct_answer) {
             console.log("is this thing on?")
             alert("Hip Hip Hooray! Nice Work.")
             { setCount(count + 1) }
         } else {
             console.log("oh noooo")
-            alert("Oh no! Nice Try, The Right Answer is ${correctAnswer}")
+            alert(`Oh no! Nice Try, The Right Answer is ${correctAnswers}`)
         }
         { setCurrentQuestionIndex(currentQuestionIndex + 1) }
     }
@@ -63,7 +65,7 @@ function Questions({ categoryURL }) {
             <div className='questions-list'>
                 {triviaQuestions.length > 0 &&
                     <>
-                        <h1>Question{currentQuestionIndex + 1}:<br />
+                        <h1>Question {currentQuestionIndex + 1}:<br />
                             {decodeHtml(triviaQuestions[currentQuestionIndex].question)}</h1>
                         <ul>
                             {getAnswerList().map(

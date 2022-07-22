@@ -26,7 +26,7 @@ function CategoryList({ categories }) {
                 <h1>Catergory List</h1>
             )}
             {selectedCategory ? (
-                <Questions categoryURL={categoryURL} />
+                <Questions categoryID={categoryURL} />
             ) : (
                 categories.map((category) =>
                     <div>
