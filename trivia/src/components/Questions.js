@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import endGame from './Endgame'
+import { Link } from "react-router-dom"
+import MainPage from './Catergories'
+import CategoryList from './CategoryList'
 
-function Questions(categoryURL) {
+function Questions(categoryURL, selectedCategory) {
     const { categoryID } = categoryURL
     const [triviaQuestions, setTriviaQuestions] = useState([])
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -59,6 +62,9 @@ function Questions(categoryURL) {
         { setCurrentQuestionIndex(currentQuestionIndex + 1) }
     }
 
+    function handleEndGame() {
+
+    }
 
     //return for Questions function
     return (
@@ -77,15 +83,22 @@ function Questions(categoryURL) {
                                 )}
                             </ul>
                             <br />
-
-                            <button>You have {count} right answers.</button>
-
+                            <h3>You have {count} right answers.</h3>
+                            <button onClick={() => { handleEndGame('') }}>End Game and Return to Categories List</button>
                         </>
                     }
                 </div>
             ) : (
-                console.log("hello in there")
-                // <endGame categoryID={categoryID} count={count} />
+                <div className='end-screen'>
+                    <h1>That's All Folks!</h1>
+                    <h2>Thanks for Playing Trivia. You scored {count} correct questions</h2>
+                    {count > 7 ? (
+                        <h3>Way to go rockstar!</h3>
+                    ) : (
+                        <h3>Better freshen up those skills!</h3>
+                    )}
+                    <button onClick={() => { handleEndGame(' ') }}>Play Again!</button>
+                </div>
             )}
         </>
     );
