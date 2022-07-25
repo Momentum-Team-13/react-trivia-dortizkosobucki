@@ -4,7 +4,7 @@ import Questions from './Questions'
 // import Categories from './Catergories'
 
 function CategoryList({ categories }) {
-    const [selectedCategory, setSelectedCategory] = useState(null)
+    const [selectedCategory, setSelectedCategory] = useState('')
     const [categoryURL, setCategoryURL] = useState()
     const afterClick = () => {
         console.log('selected')
@@ -21,7 +21,7 @@ function CategoryList({ categories }) {
     return (
         <div>
             {selectedCategory ? (
-                <h1>{selectedCategory.name}</h1>
+                <h1 id="category-selected" >{selectedCategory.name}</h1>
             ) : (
                 <>
                     <h1>TRIVIA CHALLENGE</h1>

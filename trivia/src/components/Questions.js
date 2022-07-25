@@ -3,9 +3,13 @@ import axios from 'axios'
 import endGame from './Endgame'
 import CategoryList from './CategoryList'
 import App from '../App'
+import MainPage from './Catergories'
 
 function Questions(props) {
     const { setSelectedCategory,
+        setCategories,
+        setCategoryURL,
+        selectedCategory,
         categoryID } = props
     const [triviaQuestions, setTriviaQuestions] = useState([])
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -69,14 +73,24 @@ function Questions(props) {
         { setCurrentQuestionIndex(currentQuestionIndex + 1) }
     }
 
-    function handleEndGame() {
-        // if (triviaQuestions.length === 10) {
-        //     setGameFinish === true
-        // } else {
-        //     setGameFinish === false
-        // }
-        return <CategoryList />
-    }
+    const handleEndGame = () => {
+        setGameFinish(true);
+        setCount(0);
+        setTriviaQuestions('');
+        setCategoryURL("");
+        setSelectedCategory(" ");
+        setCategories('');
+        setCurrentQuestionIndex(0)
+    };
+
+    // function handleEndGame() {
+    // if (triviaQuestions.length === 10) {
+    //     setGameFinish === true
+    // } else {
+    //     setGameFinish === false
+    // }
+    //     return <CategoryList />
+    // }
     //return for Questions function
     return (
         <>
@@ -95,8 +109,7 @@ function Questions(props) {
                             </ul>
                             <br />
                             <h2 className='count'>You have {count} right answers.</h2>
-                            <button className='endGame' onClick={() => { setGameFinish(true) }}>End Game and Return to Categories List</button>
-
+                            <button className='endGame' onClick={() => { handleEndGame('') }}>End Game and Return to Categories List</button>
                         </>
                     }
                 </div>
@@ -109,11 +122,11 @@ function Questions(props) {
                     ) : (
                         <h3>Better freshen up those skills!</h3>
                     )}
-                    <button onClick={() => { setGameFinish(false) }}>Play Again!</button>
+                    <button onClick={() => { handleEndGame('') }}>Play Again!</button>
                 </div>
             )}
             {gameFinish === true ? (
-                <App />
+                <MainPage selectedCategory={selectedCategory} />
             ) : (
                 " "
             )}
