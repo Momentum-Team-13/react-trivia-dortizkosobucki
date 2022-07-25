@@ -23,7 +23,10 @@ function CategoryList({ categories }) {
             {selectedCategory ? (
                 <h1>{selectedCategory.name}</h1>
             ) : (
-                <h1>Catergory List</h1>
+                <>
+                    <h1>TRIVIA CHALLENGE</h1>
+                    <h3>Pick a Category to Start the Game!</h3>
+                </>
             )}
             {selectedCategory ? (
                 <Questions categoryID={categoryURL} />

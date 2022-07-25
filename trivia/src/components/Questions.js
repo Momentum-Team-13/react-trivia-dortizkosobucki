@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import endGame from './Endgame'
-import { Link } from "react-router-dom"
-import MainPage from './Catergories'
 import CategoryList from './CategoryList'
+import App from '../App'
 
-function Questions(categoryURL, selectedCategory) {
-    const { categoryID } = categoryURL
+function Questions(props) {
+    const { setSelectedCategory,
+        categoryID } = props
     const [triviaQuestions, setTriviaQuestions] = useState([])
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [count, setCount] = useState(0)
-    const [messageAnswer, setMessageAnswer] = useState(null)
+    const [gameFinish, setGameFinish] = useState(false)
+    //     {
+    //         gameFinish === true &&
+    //             {
+    //                 if(count === 10)
+    //     }
+    // }
+    // const [messageAnswer, setMessageAnswer] = useState(null)
 
     //decode and make html readable for questions 
     function decodeHtml(html) {
@@ -63,9 +70,13 @@ function Questions(categoryURL, selectedCategory) {
     }
 
     function handleEndGame() {
-
+        // if (triviaQuestions.length === 10) {
+        //     setGameFinish === true
+        // } else {
+        //     setGameFinish === false
+        // }
+        return <CategoryList />
     }
-
     //return for Questions function
     return (
         <>
@@ -83,8 +94,9 @@ function Questions(categoryURL, selectedCategory) {
                                 )}
                             </ul>
                             <br />
-                            <h3>You have {count} right answers.</h3>
-                            <button className='endGame' onClick={() => { handleEndGame('') }}>End Game and Return to Categories List</button>
+                            <h2 className='count'>You have {count} right answers.</h2>
+                            <button className='endGame' onClick={() => { setGameFinish(true) }}>End Game and Return to Categories List</button>
+
                         </>
                     }
                 </div>
@@ -97,8 +109,13 @@ function Questions(categoryURL, selectedCategory) {
                     ) : (
                         <h3>Better freshen up those skills!</h3>
                     )}
-                    <button onClick={() => { handleEndGame(' ') }}>Play Again!</button>
+                    <button onClick={() => { setGameFinish(false) }}>Play Again!</button>
                 </div>
+            )}
+            {gameFinish === true ? (
+                <App />
+            ) : (
+                " "
             )}
         </>
     );

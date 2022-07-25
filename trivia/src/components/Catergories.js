@@ -61,7 +61,7 @@ function MainPage() {
     }, [])
 
     return (
-        <div>
+        <div className='categories-list'>
             <CategoryList categories={categories} />
         </div>
     );
