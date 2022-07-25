@@ -96,9 +96,9 @@ function Questions(props) {
                                 {decodeHtml(triviaQuestions[currentQuestionIndex].question)}</h1>
                             <ul className='questions'>
                                 {getAnswerList().map(
-                                    (answer, index) => <li key={index}>
+                                    (answer, index) => <div key={index}>
                                         <button className='answerButtons' onClick={() => { handleUserAnswer(answer) }}>{decodeHtml(answer)}</button>
-                                    </li>
+                                    </div>
                                 )}
                             </ul>
                             <br />

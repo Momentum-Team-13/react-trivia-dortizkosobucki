@@ -10,6 +10,16 @@ button {
   border-radius: 50px;
 }
 
+
+.answerButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 0px;
+}
+
 .categoryButton {
   display: inline-grid;
   width: 300px;
@@ -17,6 +27,15 @@ button {
   text-align: center;
   margin-left: 45px;
   margin-right: auto;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-left: 0px;
 }
 
 h1 {
