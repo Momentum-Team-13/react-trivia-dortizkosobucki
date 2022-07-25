@@ -29,7 +29,7 @@ function CategoryList({ categories }) {
                 <Questions categoryID={categoryURL} />
             ) : (
                 categories.map((category) =>
-                    <div>
+                    <div className='categoryButton'>
                         <button onClick={() => handleSelectedCategory(category)}>{category.name}</button>
                     </div>
                 )
