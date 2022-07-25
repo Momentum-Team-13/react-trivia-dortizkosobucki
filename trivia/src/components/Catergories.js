@@ -61,9 +61,11 @@ function MainPage() {
     }, [])
 
     return (
-        <div className='categories-list'>
-            <CategoryList categories={categories} />
-        </div>
+        <div className='EVERYTHING'>
+            <div className='categories-list'>
+                <CategoryList categories={categories} />
+            </div>
+        </div >
     );
 }
 

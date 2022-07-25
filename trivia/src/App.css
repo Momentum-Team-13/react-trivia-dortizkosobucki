@@ -45,6 +45,13 @@ h3 {
 
 }
 
+.EVERYTHING {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(126, 246, 216);
+}
+
 /* h2 {
   text-align: center;
 } */

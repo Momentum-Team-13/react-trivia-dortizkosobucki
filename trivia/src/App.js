@@ -5,9 +5,9 @@ import MainPage from './components/Catergories';
 
 function App() {
   return (
-    <div>
-      <MainPage />
-    </div>
+
+    <MainPage />
+
   )
 }
 

@@ -4,7 +4,7 @@ import Questions from './Questions'
 // import Categories from './Catergories'
 
 function CategoryList({ categories }) {
-    const [selectedCategory, setSelectedCategory] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState(null)
     const [categoryURL, setCategoryURL] = useState()
     const afterClick = () => {
         console.log('selected')
@@ -21,21 +21,18 @@ function CategoryList({ categories }) {
     return (
         <div>
             {selectedCategory ? (
-                <h1 id="category-selected" >{selectedCategory.name}</h1>
+                <Questions categoryID={categoryURL} />
             ) : (
                 <>
                     <h1>TRIVIA CHALLENGE</h1>
                     <h3>Pick a Category to Start the Game!</h3>
+                    {categories.map((category) => (
+                        <div className='categoryButton'>
+                            <button onClick={() => handleSelectedCategory(category)}>{category.name} </button>
+                        </div>
+                    ))
+                    }
                 </>
-            )}
-            {selectedCategory ? (
-                <Questions categoryID={categoryURL} />
-            ) : (
-                categories.map((category) =>
-                    <div className='categoryButton'>
-                        <button onClick={() => handleSelectedCategory(category)}>{category.name}</button>
-                    </div>
-                )
             )}
         </div >
     )
